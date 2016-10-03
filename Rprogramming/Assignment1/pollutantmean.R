@@ -6,34 +6,13 @@
 
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
-      setwd(file.path(getwd(), directory))
-      sum = 0
-      counts = 0
+        all_files <- list.files(directory, full.names = TRUE)
 
-      for (i in id) {
-        if (i < 10) {
-          data <- read.csv(paste("0", "0", as.character(i), ".csv", sep =""),
-          header = TRUE, na.rm = TRUE)
-        }
-        else if (i >= 10 & 1 < 100) {
-          data <- read.csv(paste("0", as.character(i), ".csv", sep = ""),
-          header = TRUE, na.rm = TRUE)
-        }
-        else {
-          data <- read.csv(paste(as.character(i), ".csv", sep = ""),
-          header = TRUE, na.rm = TRUE)
+        dat <- data.frame()
+
+        for (i in id) {
+                dat <- rbind(data, read.csv(all_files[i]))
         }
 
-      }
-
-      counts = counts + nrow(data)
-      if (pollutant == 'sulfate') {
-        sum = sum + sum(data$sulfate)
-      }
-      else {
-        sum = sum + sum(data$nitrate)
-      }
-
-      setwd("..")
-      return (sum/counts)
+        mean(data[, pollutant], na.rm = TRUE)
 }
