@@ -5,7 +5,7 @@
 #################################################
 
 #################################################
-# 1 Plot the 30-day mortality rates for heart
+# 1. Plot the 30-day mortality rates for heart
 # attack
 #################################################
 
@@ -23,18 +23,3 @@ outcome[, 11] <- as.numeric(outcome[, 11])
 
 hist(outcome[, 11])
 ## histogram generated
-
-#################################################
-# Finding the best hospital in a state
-#################################################
-
-best <- function(state, outcome) {
-  ## Read outcome data
-  outcome <- read.csv("outcome-of-care-measures.csv",
-                      colClasses = "character")
-
-  ## Check that state and outcomes are valid
-
-  ## Return hospital name in that state with lowest 30-day death rate
-
-}
